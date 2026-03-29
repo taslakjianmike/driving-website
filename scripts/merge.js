@@ -3,7 +3,8 @@ const path = require('path');
 
 // ── CHANGE THIS VALUE TO THE PATH TO YOUR FOLDER ──────────────────────────────────────
 const SOURCE_DIR = '/path/to/your/folder';
-// ─────────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────────────
+
 const OUTPUT_FILE = path.join(__dirname, '../all_questions.json');
 
 let allQuestions = [];
