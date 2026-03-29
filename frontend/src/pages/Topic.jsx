@@ -1,3 +1,52 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getQuestionsByTopic, getTopics } from '../api/index.js'
+import styles from './Topic.module.css'
+
 export default function Topic() {
-  return <p>Topic page</p>
+  const { topicId } = useParams()
+  const navigate = useNavigate()
+  const [questions, setQuestions] = useState([])
+  const [topicName, setTopicName] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    Promise.all([
+      getQuestionsByTopic(topicId),
+      getTopics()
+    ])
+      .then(([questionsRes, topicsRes]) => {
+        setQuestions(questionsRes.data)
+        const topic = topicsRes.data.find(t => t.id === parseInt(topicId))
+        setTopicName(topic ? topic.name : 'Topic')
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false))
+  }, [topicId])
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <button className={styles.backButton} onClick={() => navigate('/')}>
+          Back to topics
+        </button>
+        <h1 className={styles.title}>{topicName}</h1>
+      </div>
+      <div className={styles.grid}>
+        {questions.map((question, index) => (
+          <button
+            key={question.id}
+            className={styles.questionButton}
+            onClick={() => navigate(`/topic/${topicId}/question/${question.id}`)}
+          >
+            Question {index + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
 }
