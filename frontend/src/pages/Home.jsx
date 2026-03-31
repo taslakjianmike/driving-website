@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { getTopics } from '../api/index.js'
 import Hero from '../components/Hero.jsx'
 import StatStrip from '../components/StatStrip.jsx'
+import PitchSection from '../components/PitchSection.jsx'
 import TopicGrid from '../components/TopicGrid.jsx'
 import styles from './Home.module.css'
 
@@ -29,6 +30,7 @@ export default function Home() {
     <div className={styles.page}>
       <Hero onStartPracticing={handleStartPracticing} />
       <StatStrip />
+      <PitchSection />
       <div ref={topicsRef}>
         <TopicGrid topics={topics} />
       </div>
