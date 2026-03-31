@@ -23,9 +23,64 @@ function generateIcons(count) {
       fontSize: `${20 + Math.random() * 28}px`,
       animationDuration: `${6 + Math.random() * 10}s`,
       animationDelay: `${Math.random() * 6}s`,
-      opacity: 0.3 + Math.random() * 0.45,
+      opacity: 0.3 + Math.random() * 0.25,
     }
   }))
+}
+
+function useCountUp(target, duration, triggered) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!triggered) return
+    let start = 0
+    const steps = 60
+    const increment = target / steps
+    const interval = duration / steps
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= target) {
+        setCount(target)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, interval)
+    return () => clearInterval(timer)
+  }, [triggered, target, duration])
+
+  return count
+}
+
+function StatStrip() {
+  const [triggered, setTriggered] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTriggered(true) },
+      { threshold: 0.4 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const questions = useCountUp(1011, 1200, triggered)
+  const languages = useCountUp(5, 800, triggered)
+
+  return (
+    <div className={styles.statStrip} ref={ref}>
+      <div className={styles.stat}>
+        <span className={styles.statNumber}>{questions.toLocaleString()}</span>
+        <span className={styles.statLabel}>Questions</span>
+      </div>
+      <div className={styles.statDivider} />
+      <div className={styles.stat}>
+        <span className={styles.statNumber}>{languages}</span>
+        <span className={styles.statLabel}>Languages</span>
+      </div>
+    </div>
+  )
 }
 
 export default function Home() {
@@ -68,6 +123,8 @@ export default function Home() {
           </button>
         </div>
       </section>
+
+      <StatStrip />
 
       <section className={styles.topicsSection} ref={topicsRef}>
         <h2 className={styles.topicsHeading}>Choose a Topic</h2>
