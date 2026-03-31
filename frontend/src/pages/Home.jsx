@@ -5,6 +5,7 @@ import StatStrip from '../components/StatStrip.jsx'
 import PitchSection from '../components/PitchSection.jsx'
 import TopicGrid from '../components/TopicGrid.jsx'
 import styles from './Home.module.css'
+import Footer from '../components/Footer.jsx'
 
 export default function Home() {
   const [topics, setTopics] = useState([])
@@ -34,6 +35,7 @@ export default function Home() {
       <div ref={topicsRef}>
         <TopicGrid topics={topics} />
       </div>
+      <Footer />
     </div>
   )
 }
