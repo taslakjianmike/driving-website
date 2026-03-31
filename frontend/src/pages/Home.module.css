@@ -1,18 +1,110 @@
-.container {
+.page {
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.floatingBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floatingIcon {
+  position: absolute;
+  animation: float linear infinite;
+  user-select: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-18px) rotate(4deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-4deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.heroContent {
+  position: relative;
+  text-align: center;
+  padding: 40px 24px;
+  animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroTitle {
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 800;
+  color: #111;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  color: #555;
+  max-width: 420px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.heroButton {
+  display: inline-block;
+  padding: 16px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: #4a90d9;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.heroButton:hover {
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+.topicsSection {
   max-width: 600px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 80px 20px;
 }
 
-.title {
+.topicsHeading {
   text-align: center;
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 32px;
-  color: #666;
+  color: #111;
 }
 
 .topicList {
@@ -30,8 +122,10 @@
   background: white;
   text-align: left;
   width: 100%;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .topicButton:hover {
-  background: #f5f5f5;
+  background: #f0f7ff;
+  border-color: #4a90d9;
 }
