@@ -33,8 +33,12 @@ export default function PitchSection() {
         </p>
       </div>
       <div className={styles.grid}>
-        {PILLARS.map(pillar => (
-          <div key={pillar.title} className={styles.card}>
+        {PILLARS.map((pillar, index) => (
+          <div
+            key={pillar.title}
+            className={styles.card}
+            style={{ animationDelay: `${index * 80}ms` }}
+          >
             <span className={styles.icon}>{pillar.icon}</span>
             <h3 className={styles.cardTitle}>{pillar.title}</h3>
             <p className={styles.cardDescription}>{pillar.description}</p>

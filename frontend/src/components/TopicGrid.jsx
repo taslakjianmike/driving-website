@@ -21,10 +21,11 @@ export default function TopicGrid({ topics }) {
     <section className={styles.section}>
       <h2 className={styles.heading}>Choose a Topic</h2>
       <div className={styles.grid}>
-        {topics.map(topic => (
+        {topics.map((topic, index) => (
           <button
             key={topic.id}
             className={styles.card}
+            style={{ animationDelay: `${index * 60}ms` }}
             onClick={() => navigate(`/topic/${topic.id}`)}
           >
             <span className={styles.icon}>{TOPIC_ICONS[topic.id]}</span>

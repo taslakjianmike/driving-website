@@ -56,12 +56,14 @@
   border: 1px solid #e4e9f0;
   border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .questionButton:hover {
   border-color: #4a90d9;
-  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.12);
+  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.08), 0 8px 24px rgba(74, 144, 217, 0.15);
   transform: translateY(-2px);
 }
 
