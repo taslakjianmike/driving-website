@@ -7,7 +7,7 @@ const OUTPUT_DIR = path.join(__dirname, '../images');
 const IMAGE_FOLDER_NAMES = {
   extracted_data1: 'images',
   extracted_data2: 'images',
-  extracted_data3: null,
+  extracted_data3: 'images',
   extracted_data4: 'images',
   extracted_data5: 'images',
   extracted_data6: 'images',
