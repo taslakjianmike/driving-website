@@ -32,9 +32,10 @@ export default function Topic() {
     <div className={styles.container}>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={() => navigate('/')}>
-          Back to topics
+          ← Back to topics
         </button>
         <h1 className={styles.title}>{topicName}</h1>
+        <p className={styles.subtitle}>{questions.length} questions</p>
       </div>
       <div className={styles.grid}>
         {questions.map((question, index) => (
@@ -43,7 +44,7 @@ export default function Topic() {
             className={styles.questionButton}
             onClick={() => navigate(`/topic/${topicId}/question/${question.id}`)}
           >
-            Question {index + 1}
+            <span className={styles.questionNumber}>{index + 1}</span>
           </button>
         ))}
       </div>
