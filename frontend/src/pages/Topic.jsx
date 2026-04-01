@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getQuestionsByTopic, getTopics } from '../api/index.js'
 import styles from './Topic.module.css'
@@ -10,6 +10,8 @@ export default function Topic() {
   const [topicName, setTopicName] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [visible, setVisible] = useState(false)
+  const gridRef = useRef(null)
 
   useEffect(() => {
     Promise.all([
@@ -25,6 +27,16 @@ export default function Topic() {
       .finally(() => setLoading(false))
   }, [topicId])
 
+  useEffect(() => {
+    if (!gridRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.05 }
+    )
+    observer.observe(gridRef.current)
+    return () => observer.disconnect()
+  }, [loading])
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
 
@@ -37,11 +49,12 @@ export default function Topic() {
         <h1 className={styles.title}>{topicName}</h1>
         <p className={styles.subtitle}>{questions.length} questions</p>
       </div>
-      <div className={styles.grid}>
+      <div className={styles.grid} ref={gridRef}>
         {questions.map((question, index) => (
           <button
             key={question.id}
-            className={styles.questionButton}
+            className={`${styles.questionButton} ${visible ? styles.buttonVisible : ''}`}
+            style={{ animationDelay: `${Math.min(index * 20, 600)}ms` }}
             onClick={() => navigate(`/topic/${topicId}/question/${question.id}`)}
           >
             <span className={styles.questionNumber}>{index + 1}</span>

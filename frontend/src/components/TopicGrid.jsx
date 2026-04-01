@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './TopicGrid.module.css'
 
@@ -16,15 +17,26 @@ const TOPIC_ICONS = {
 
 export default function TopicGrid({ topics }) {
   const navigate = useNavigate()
+  const [visible, setVisible] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section className={styles.section}>
       <h2 className={styles.heading}>Choose a Topic</h2>
-      <div className={styles.grid}>
+      <div className={styles.grid} ref={ref}>
         {topics.map((topic, index) => (
           <button
             key={topic.id}
-            className={styles.card}
+            className={`${styles.card} ${visible ? styles.cardVisible : ''}`}
             style={{ animationDelay: `${index * 60}ms` }}
             onClick={() => navigate(`/topic/${topic.id}`)}
           >
