@@ -41,25 +41,31 @@ export default function Topic() {
   if (error) return <p>Error: {error}</p>
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div className={styles.page}>
+      <div className={styles.nav}>
         <button className={styles.backButton} onClick={() => navigate('/')}>
           ← Back to topics
         </button>
-        <h1 className={styles.title}>{topicName}</h1>
-        <p className={styles.subtitle}>{questions.length} questions</p>
+        <div className={styles.navCenter}>
+          <span className={styles.navTitle}>{topicName}</span>
+          <span className={styles.navSubtitle}>{questions.length} questions</span>
+        </div>
+        <div className={styles.navSpacer} />
       </div>
-      <div className={styles.grid} ref={gridRef}>
-        {questions.map((question, index) => (
-          <button
-            key={question.id}
-            className={`${styles.questionButton} ${visible ? styles.buttonVisible : ''}`}
-            style={{ animationDelay: `${Math.min(index * 20, 600)}ms` }}
-            onClick={() => navigate(`/topic/${topicId}/question/${question.id}`)}
-          >
-            <span className={styles.questionNumber}>{index + 1}</span>
-          </button>
-        ))}
+
+      <div className={styles.container}>
+        <div className={styles.grid} ref={gridRef}>
+          {questions.map((question, index) => (
+            <button
+              key={question.id}
+              className={`${styles.questionButton} ${visible ? styles.buttonVisible : ''}`}
+              style={{ animationDelay: `${Math.min(index * 20, 600)}ms` }}
+              onClick={() => navigate(`/topic/${topicId}/question/${question.id}`)}
+            >
+              <span className={styles.questionNumber}>{index + 1}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
