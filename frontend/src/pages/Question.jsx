@@ -55,55 +55,62 @@ export default function Question() {
   if (!currentQuestion) return <p>Question not found</p>
 
   return (
-    <div className={styles.container}>
-      <div className={styles.nav}>
-        <button
-          className={styles.navButton}
-          onClick={() => navigate(`/topic/${topicId}`)}
-        >
-          All questions
-        </button>
-        <span className={styles.questionNumber}>
-          Question {currentIndex + 1} of {questions.length}
-        </span>
-        <div style={{ display: 'flex', gap: '8px' }}>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <div className={styles.nav}>
           <button
             className={styles.navButton}
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
+            onClick={() => navigate(`/topic/${topicId}`)}
           >
-            Previous
+            All questions
           </button>
-          <button
-            className={styles.navButton}
-            onClick={handleNext}
-            disabled={currentIndex === questions.length - 1}
-          >
-            Next
-          </button>
-        </div>
-      </div>
-
-      <p className={styles.questionText}>{currentQuestion.question_text}</p>
-
-      {currentQuestion.image_url && (
-        <img
-          src={`http://localhost:3001${currentQuestion.image_url}`}
-          alt="Question"
-          className={styles.image}
-        />
-      )}
-
-      <div className={styles.answers}>
-        {currentQuestion.answers.filter(a => a !== null).map(answer => (
+          <span className={styles.questionNumber}>
+            Question {currentIndex + 1} of {questions.length}
+          </span>
+          <div className={styles.navButtons}>
             <button
-                key={answer.id}
-                className={getAnswerClass(answer.number)}
-                onClick={() => handleAnswer(answer.number)}
+              className={styles.navButton}
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
             >
-                {answer.number}. {answer.text}
+              Previous
             </button>
-        ))}
+            <button
+              className={styles.navButton}
+              onClick={handleNext}
+              disabled={currentIndex === questions.length - 1}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.questionArea}>
+          <span className={styles.badge}>Q{currentIndex + 1}</span>
+          <p className={styles.questionText}>{currentQuestion.question_text}</p>
+          {currentQuestion.image_url && (
+            <div className={styles.imageCard}>
+              <img
+                src={`http://localhost:3001${currentQuestion.image_url}`}
+                alt="Question"
+                className={styles.image}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className={styles.answers}>
+          {currentQuestion.answers.filter(a => a !== null).map(answer => (
+            <button
+              key={answer.id}
+              className={getAnswerClass(answer.number)}
+              onClick={() => handleAnswer(answer.number)}
+            >
+              <span className={styles.answerBadge}>{answer.number}</span>
+              <span className={styles.answerText}>{answer.text}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
