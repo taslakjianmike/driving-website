@@ -4,7 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+  background-color: #ffffff;
+  background-image: radial-gradient(circle, #c8d8e8 1px, transparent 1px);
+  background-size: 28px 28px;
   overflow: hidden;
 }
 
@@ -48,10 +50,13 @@
 .heroTitle {
   font-size: clamp(44px, 8vw, 88px);
   font-weight: 800;
-  color: #111;
   line-height: 1.0;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
+  background: linear-gradient(135deg, #111111 0%, #4a90d9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .heroSubtitle {

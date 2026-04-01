@@ -32,7 +32,7 @@ export default function Home() {
       <Hero onStartPracticing={handleStartPracticing} />
       <StatStrip />
       <PitchSection />
-      <div ref={topicsRef}>
+      <div ref={topicsRef} className={styles.topicsWrapper}>
         <TopicGrid topics={topics} />
       </div>
       <Footer />
