@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useCountUp } from '../utils/homeHelpers.js'
 import styles from './StatStrip.module.css'
 
-export default function StatStrip() {
+export default function StatStrip({ totalQuestions }) {
   const [triggered, setTriggered] = useState(false)
   const ref = useRef(null)
 
@@ -15,7 +15,7 @@ export default function StatStrip() {
     return () => observer.disconnect()
   }, [])
 
-  const questions = useCountUp(1011, 1200, triggered)
+  const questions = useCountUp(totalQuestions, 1200, triggered)
   const languages = useCountUp(5, 800, triggered)
 
   return (

@@ -12,6 +12,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const topicsRef = useRef(null)
+  const totalQuestions = topics.reduce((sum, t) => sum + parseInt(t.question_count), 0)
 
   useEffect(() => {
     getTopics()
@@ -29,8 +30,8 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <Hero onStartPracticing={handleStartPracticing} />
-      <StatStrip />
+      <Hero onStartPracticing={handleStartPracticing} totalQuestions={totalQuestions} />
+      <StatStrip totalQuestions={totalQuestions} />
       <PitchSection />
       <div ref={topicsRef} className={styles.topicsWrapper}>
         <TopicGrid topics={topics} />

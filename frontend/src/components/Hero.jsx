@@ -10,7 +10,7 @@ function FloatingIcon({ icon, style }) {
   )
 }
 
-export default function Hero({ onStartPracticing }) {
+export default function Hero({ onStartPracticing, totalQuestions }) {
   const [icons] = useState(() => generateIcons(22))
 
   return (
@@ -23,7 +23,7 @@ export default function Hero({ onStartPracticing }) {
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>Driving Exam Prep</h1>
         <p className={styles.heroSubtitle}>
-          1,011 questions across 10 topics — study at your own pace and pass with confidence.
+          {totalQuestions.toLocaleString()} questions across 10 topics — study at your own pace and pass with confidence.
         </p>
         <button className={styles.heroButton} onClick={onStartPracticing}>
           Start Practicing
