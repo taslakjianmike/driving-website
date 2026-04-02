@@ -10,8 +10,8 @@ function FloatingIcon({ icon, style }) {
   )
 }
 
-export default function Hero({ onStartPracticing, totalQuestions, subtitle, startPracticingLabel }) {
-  const [icons] = useState(() => generateIcons(22))
+export default function Hero({ onStartPracticing, totalQuestions, title, subtitle, startPracticingLabel }) {
+  const [icons] = useState(() => generateIcons(28))
 
   return (
     <section className={styles.hero}>
@@ -21,7 +21,7 @@ export default function Hero({ onStartPracticing, totalQuestions, subtitle, star
         ))}
       </div>
       <div className={styles.heroContent}>
-        <h1 className={styles.heroTitle}>Driving Exam Prep</h1>
+        <h1 className={styles.heroTitle}>{title}</h1>
         <p className={styles.heroSubtitle}>
           {totalQuestions.toLocaleString()} {subtitle}
         </p>
