@@ -15,7 +15,7 @@ const TOPIC_ICONS = {
   20: '🩺',
 }
 
-export default function TopicGrid({ topics }) {
+export default function TopicGrid({ topics, heading }) {
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
   const ref = useRef(null)
@@ -31,7 +31,7 @@ export default function TopicGrid({ topics }) {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.heading}>Choose a Topic</h2>
+      <h2 className={styles.heading}>{heading}</h2>
       <div className={styles.grid} ref={ref}>
         {topics.map((topic, index) => (
           <button

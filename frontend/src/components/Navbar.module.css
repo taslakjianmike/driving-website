@@ -1,0 +1,28 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e4e9f0;
+}
+
+.logo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.logo:hover {
+  color: #4a90d9;
+}
